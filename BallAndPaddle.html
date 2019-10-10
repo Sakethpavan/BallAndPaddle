@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<style>
+			*{
+				margin:0.1px;
+				padding:0.1px;
+			}
+		</style>
+	</head>
+	<canvas id="mycanvas" height="600" width="800"></canvas>
+	<script>
+		var canvas;
+		var canvasContext;
+		window.onload = function(){
+			canvas=document.getElementById("mycanvas");
+			canvasContext=canvas.getContext('2d');
+			canvasContext.fillStyle='black';
+			canvasContext.fillRect(0,0,canvas.width,canvas.height);
+			canvasContext.fillStyle="red";
+			canvasContext.fillRect(200,100,400,400);
+			
+		}
+	
+	</script>
+</html>
+
