@@ -3,41 +3,49 @@
 	<canvas id="mycanvas" height="600" width="800"></canvas>
 	
 	<script>
-		//In this we are creating bouncing back motion for the object 
-		//and in this we are also going to remove redudant code colorRect() function
+		//Drawing circles and details
+		
 		var canvas;
 		var canvasContext;
 		var ballX=50;
-		var ballSpeed=5;//Denotes the ballSpeed
+		var ballSpeedX=5;//Denotes the ballSpeed
 		window.onload = function(){
 			canvas=document.getElementById("mycanvas");
 			canvasContext=canvas.getContext('2d');
-			//for smoother motion
 			var framesPerSecond=30;
-			//inline fuunction
 			setInterval(function(){ moveEverything();drawEverything();},1000/framesPerSecond);
 		}
 		
-		//separating movement and drawing 
+		//separating movement and drawing
 		
 		function moveEverything(){
-			ballX=ballX + ballSpeed;//also for smoother motion do small increments
-			if(ballX >= canvas.width-25)//here 25 is the size of moving object
+			ballX=ballX + ballSpeedX;//also for smoother motion do small increments
+			if(ballX >= canvas.width-10)//here 25 is the size of moving object
 			{
-				ballSpeed = -ballSpeed;
+				ballSpeedX = -ballSpeedX;
 			}
 			if(ballX <0)
 			{
-				ballSpeed = -ballSpeed;
+				ballSpeedX = -ballSpeedX;
 			}
 			
 			console.log(ballX);
 		}
 		//drawing a white rectangle towards left of canvas
 		function drawEverything(){
-			colorRect(0,0,canvas.width,canvas.height,'black');
+			colorRect(0,0,canvas.width,canvas.height,'green');
 			colorRect(1,200,15,125,'white');
-			colorRect(ballX,20,25,25,'red');
+			colorCircle(ballX,100,10,'red');
+		}
+		
+		function colorCircle(centerX,centerY,radius,drawColor)
+		{
+			//there is no such function to draw circle like drawRect so we are using arc method
+			canvasContext.fillStyle = drawColor;
+			canvasContext.beginPath();
+			canvasContext.arc(centerX,centerY,radius,0,Math.PI,true);// to know about arc visit here : https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
+			canvasContext.stroke();
+		
 		}
 		
 		function colorRect(leftX,topY,width,height,color)
