@@ -3,9 +3,12 @@
 	<canvas id="mycanvas" height="600" width="800"></canvas>
 	
 	<script>
+		//In this we are creating bouncing back motion for the object 
+		//and in this we are also going to remove redudant code colorRect() function
 		var canvas;
 		var canvasContext;
 		var ballX=50;
+		var ballSpeed=5;//Denotes the ballSpeed
 		window.onload = function(){
 			canvas=document.getElementById("mycanvas");
 			canvasContext=canvas.getContext('2d');
@@ -18,17 +21,29 @@
 		//separating movement and drawing 
 		
 		function moveEverything(){
-			ballX=ballX + 5;//also for smoother motion do small increments
+			ballX=ballX + ballSpeed;//also for smoother motion do small increments
+			if(ballX >= canvas.width-25)//here 25 is the size of moving object
+			{
+				ballSpeed = -ballSpeed;
+			}
+			if(ballX <0)
+			{
+				ballSpeed = -ballSpeed;
+			}
+			
 			console.log(ballX);
 		}
 		//drawing a white rectangle towards left of canvas
 		function drawEverything(){
-			canvasContext.fillStyle='black';
-			canvasContext.fillRect(0,0,canvas.width,canvas.height);
-			canvasContext.fillStyle="white";
-			canvasContext.fillRect(1,200,15,125);
-			canvasContext.fillStyle="red";
-			canvasContext.fillRect(ballX,20,100,25);
+			colorRect(0,0,canvas.width,canvas.height,'black');
+			colorRect(1,200,15,125,'white');
+			colorRect(ballX,20,25,25,'red');
+		}
+		
+		function colorRect(leftX,topY,width,height,color)
+		{
+			canvasContext.fillStyle = color;
+			canvasContext.fillRect(leftX,topY,width,height);
 		}
 		
 	
