@@ -33,9 +33,9 @@
 		}
 		//drawing a white rectangle towards left of canvas
 		function drawEverything(){
-			colorRect(0,0,canvas.width,canvas.height,'green');
+			colorRect(0,0,canvas.width,canvas.height,'black');
 			colorRect(1,200,15,125,'white');
-			colorCircle(ballX,100,10,'red');
+			colorCircle(ballX,100,10,'white');
 		}
 		
 		function colorCircle(centerX,centerY,radius,drawColor)
@@ -43,8 +43,8 @@
 			//there is no such function to draw circle like drawRect so we are using arc method
 			canvasContext.fillStyle = drawColor;
 			canvasContext.beginPath();
-			canvasContext.arc(centerX,centerY,radius,0,Math.PI,true);// to know about arc visit here : https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
-			canvasContext.stroke();
+			canvasContext.arc(centerX,centerY,radius,0,2*Math.PI,true);// to know about arc visit here : https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
+			canvasContext.fill();
 		
 		}
 		
