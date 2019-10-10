@@ -12,12 +12,30 @@
 		var ballSpeedX=5;//Denotes the ballSpeed
 		var ballSpeedY=5;
 		var ballRadius=10;
+		var paddle1Y=250;
+		const PADDLE_HEIGHT=100;
+		
+		function calculateMousePos(event){
+			var rect = canvas.getBoundingClientRect();
+			var root = document.documentElement;
+			var mouseX = event.clientX - rect.left - root.scrollLeft;
+			var mouseY = event.clientY - rect.top -  root.scrollTop;
+			return{
+				x:mouseX,
+				y:mouseY
+			};
+		}
 		
 		window.onload = function(){
 			canvas=document.getElementById("mycanvas");
 			canvasContext=canvas.getContext('2d');
 			var framesPerSecond=30;
 			setInterval(function(){ moveEverything();drawEverything();},1000/framesPerSecond);
+			canvas.addEventListener('mousemove',function(event){
+													var mousePos=calculateMousePos(event);//returning x and y postions
+													paddle1Y=mousePos.y - (PADDLE_HEIGHT/2);
+												}
+									);
 		}
 		
 		//separating movement and drawing
@@ -47,7 +65,7 @@
 		//drawing a white rectangle towards left of canvas
 		function drawEverything(){
 			colorRect(0,0,canvas.width,canvas.height,'black');
-			colorRect(1,200,15,125,'white');
+			colorRect(1,paddle1Y,15,PADDLE_HEIGHT,'white');
 			colorCircle(ballX,ballY,ballRadius,'red');
 		}
 		
