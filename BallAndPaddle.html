@@ -1,26 +1,26 @@
 <html>
-	<head>
-		<style>
-			*{
-				margin:0.1px;
-				padding:0.1px;
-			}
-		</style>
-	</head>
+
 	<canvas id="mycanvas" height="600" width="800"></canvas>
+	
 	<script>
 		var canvas;
 		var canvasContext;
+		var ballX=50;
 		window.onload = function(){
 			canvas=document.getElementById("mycanvas");
 			canvasContext=canvas.getContext('2d');
+			setInterval(drawEverything,1000);
+		}
+		
+		function drawEverything(){
+			ballX=ballX + 10;
+			console.log(ballX);
 			canvasContext.fillStyle='black';
 			canvasContext.fillRect(0,0,canvas.width,canvas.height);
 			canvasContext.fillStyle="red";
-			canvasContext.fillRect(200,100,400,400);
-			
+			canvasContext.fillRect(ballX,20,1 00,25);
 		}
+		
 	
 	</script>
 </html>
-
