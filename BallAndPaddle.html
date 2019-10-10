@@ -9,16 +9,26 @@
 		window.onload = function(){
 			canvas=document.getElementById("mycanvas");
 			canvasContext=canvas.getContext('2d');
-			setInterval(drawEverything,1000);
+			//for smoother motion
+			var framesPerSecond=30;
+			//inline fuunction
+			setInterval(function(){ moveEverything();drawEverything();},1000/framesPerSecond);
 		}
 		
-		function drawEverything(){
-			ballX=ballX + 10;
+		//separating movement and drawing 
+		
+		function moveEverything(){
+			ballX=ballX + 5;//also for smoother motion do small increments
 			console.log(ballX);
+		}
+		//drawing a white rectangle towards left of canvas
+		function drawEverything(){
 			canvasContext.fillStyle='black';
 			canvasContext.fillRect(0,0,canvas.width,canvas.height);
+			canvasContext.fillStyle="white";
+			canvasContext.fillRect(1,200,15,125);
 			canvasContext.fillStyle="red";
-			canvasContext.fillRect(ballX,20,1 00,25);
+			canvasContext.fillRect(ballX,20,100,25);
 		}
 		
 	
