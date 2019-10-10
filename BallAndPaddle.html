@@ -13,7 +13,9 @@
 		var ballSpeedY=5;
 		var ballRadius=10;
 		var paddle1Y=250;
+		var paddle2Y=250;
 		const PADDLE_HEIGHT=100;
+		const PADDLE_WIDTH=10
 		
 		function calculateMousePos(event){
 			var rect = canvas.getBoundingClientRect();
@@ -34,6 +36,7 @@
 			canvas.addEventListener('mousemove',function(event){
 													var mousePos=calculateMousePos(event);//returning x and y postions
 													paddle1Y=mousePos.y - (PADDLE_HEIGHT/2);
+													paddle2Y=mousePos.y - (PADDLE_HEIGHT/2);
 												}
 									);
 		}
@@ -45,11 +48,22 @@
 			ballY = ballY + ballSpeedY;
 			if(ballX >= canvas.width-ballRadius)//here 25 is the size of moving object
 			{
-				ballSpeedX = -ballSpeedX;
+				if(ballY >paddle1Y && ballY<paddle1Y +PADDLE_HEIGHT)
+				{
+					ballSpeedX = -ballSpeedX;
+				}
+				else
+					ballReset();	
 			}
 			if(ballX < ballRadius)
 			{
-				ballSpeedX = -ballSpeedX;
+				//
+				if(ballY >paddle1Y && ballY<paddle1Y +PADDLE_HEIGHT)
+				{
+					ballSpeedX = -ballSpeedX;
+				}
+				else
+					ballReset();
 			}
 			if(ballY< ballRadius)
 			{
@@ -64,10 +78,23 @@
 		}
 		//drawing a white rectangle towards left of canvas
 		function drawEverything(){
+			//canvas
 			colorRect(0,0,canvas.width,canvas.height,'black');
-			colorRect(1,paddle1Y,15,PADDLE_HEIGHT,'white');
+			//left paddle
+			colorRect(1,paddle1Y,PADDLE_WIDTH,PADDLE_HEIGHT,'white');
+			//right paddle
+			colorRect(canvas.width-PADDLE_WIDTH-1,paddle2Y,PADDLE_WIDTH,PADDLE_HEIGHT,'white');
 			colorCircle(ballX,ballY,ballRadius,'red');
 		}
+		
+		function ballReset()
+		{
+			ballX=canvas.width/2;
+			ballY=canvas.height/2;
+			ballSpeedX=-ballSpeedX;
+		
+		}
+		
 		
 		function colorCircle(centerX,centerY,radius,drawColor)
 		{
