@@ -8,7 +8,11 @@
 		var canvas;
 		var canvasContext;
 		var ballX=50;
+		var ballY=50;
 		var ballSpeedX=5;//Denotes the ballSpeed
+		var ballSpeedY=5;
+		var ballRadius=10;
+		
 		window.onload = function(){
 			canvas=document.getElementById("mycanvas");
 			canvasContext=canvas.getContext('2d');
@@ -19,14 +23,23 @@
 		//separating movement and drawing
 		
 		function moveEverything(){
-			ballX=ballX + ballSpeedX;//also for smoother motion do small increments
-			if(ballX >= canvas.width-10)//here 25 is the size of moving object
+			ballX = ballX + ballSpeedX;//also for smoother motion do small increments
+			ballY = ballY + ballSpeedY;
+			if(ballX >= canvas.width-ballRadius)//here 25 is the size of moving object
 			{
 				ballSpeedX = -ballSpeedX;
 			}
-			if(ballX <0)
+			if(ballX < ballRadius)
 			{
 				ballSpeedX = -ballSpeedX;
+			}
+			if(ballY< ballRadius)
+			{
+				ballSpeedY=-ballSpeedY;
+			}
+			if(ballY >= canvas.height - ballRadius)
+			{
+				ballSpeedY=-ballSpeedY;
 			}
 			
 			console.log(ballX);
@@ -35,7 +48,7 @@
 		function drawEverything(){
 			colorRect(0,0,canvas.width,canvas.height,'black');
 			colorRect(1,200,15,125,'white');
-			colorCircle(ballX,100,10,'red');
+			colorCircle(ballX,ballY,ballRadius,'red');
 		}
 		
 		function colorCircle(centerX,centerY,radius,drawColor)
