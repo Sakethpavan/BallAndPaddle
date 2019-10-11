@@ -15,7 +15,10 @@
 		var paddle1Y=250;
 		var paddle2Y=250;
 		const PADDLE_HEIGHT=100;
-		const PADDLE_WIDTH=10
+		const PADDLE_WIDTH=10;
+		var player1Score=0;
+		var player2Score=0;
+		
 		
 		function calculateMousePos(event){
 			var rect = canvas.getBoundingClientRect();
@@ -36,34 +39,55 @@
 			canvas.addEventListener('mousemove',function(event){
 													var mousePos=calculateMousePos(event);//returning x and y postions
 													paddle1Y=mousePos.y - (PADDLE_HEIGHT/2);
-													paddle2Y=mousePos.y - (PADDLE_HEIGHT/2);
+													//paddle2Y=mousePos.y - (PADDLE_HEIGHT/2);
 												}
 									);
+								
 		}
 		
 		//separating movement and drawing
+		function computerGame(){
+			var paddle2YCenter = paddle2Y + PADDLE_HEIGHT/2;
+			if(paddle2YCenter < ballY -35)//ignoring paddle movement if ball is above 35px from center
+			{
+				paddle2Y += 6;
+			}
+			else if(paddle2YCenter > ballY -35)
+			{
+				paddle2Y -= 6;
+			}
+		}
+		
 		
 		function moveEverything(){
+			computerGame();
 			ballX = ballX + ballSpeedX;//also for smoother motion do small increments
 			ballY = ballY + ballSpeedY;
 			if(ballX >= canvas.width-ballRadius)//here 25 is the size of moving object
 			{
-				if(ballY >paddle1Y && ballY<paddle1Y +PADDLE_HEIGHT)
+				//making ball bounce if it touches paddle of right player(computer)
+				if(ballY >paddle2Y && ballY<paddle2Y +PADDLE_HEIGHT)
 				{
 					ballSpeedX = -ballSpeedX;
 				}
 				else
-					ballReset();	
+				{
+					player1Score++;
+					ballReset();			
+				}	
 			}
 			if(ballX < ballRadius)
 			{
-				//
+				//making ball bounce if it touches paddle of right player
 				if(ballY >paddle1Y && ballY<paddle1Y +PADDLE_HEIGHT)
 				{
 					ballSpeedX = -ballSpeedX;
 				}
 				else
+				{
+					player2Score++;
 					ballReset();
+				}	
 			}
 			if(ballY< ballRadius)
 			{
@@ -85,6 +109,9 @@
 			//right paddle
 			colorRect(canvas.width-PADDLE_WIDTH-1,paddle2Y,PADDLE_WIDTH,PADDLE_HEIGHT,'white');
 			colorCircle(ballX,ballY,ballRadius,'red');
+			canvasContext.fillStyle="white"
+			canvasContext.fillText(player1Score,100,100);
+			canvasContext.fillText(player2Score,600,100);
 		}
 		
 		function ballReset()
