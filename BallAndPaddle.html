@@ -100,7 +100,7 @@
 				else
 				{
 					player2Score++;
-					ballReset();
+c					ballReset();
 				}	
 			}
 			if(ballY< ballRadius)
@@ -129,7 +129,7 @@
 			//right paddle
 			colorRect(canvas.width-PADDLE_WIDTH-1,paddle2Y,PADDLE_WIDTH,PADDLE_HEIGHT,'white');
 			colorCircle(ballX,ballY,ballRadius,'red');
-			canvasContext.fillStyle="white"
+			canvasContext.fillStyle="white";
 			canvasContext.fillText(player1Score,100,100);
 			canvasContext.fillText(player2Score ,600,100);
 		}
