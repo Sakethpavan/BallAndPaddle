@@ -41,11 +41,10 @@
 			var framesPerSecond=30;
 			setInterval(function(){ moveEverything();drawEverything();},1000/framesPerSecond);
 			canvas.addEventListener('mousemove',function(event){
-													var mousePos=calculateMousePos(event);//returning x and y postions
-													paddle1Y=mousePos.y - (PADDLE_HEIGHT/2);
-													
-												}
-									);
+								var mousePos=calculateMousePos(event);//returning x and y postions
+								paddle1Y=mousePos.y - (PADDLE_HEIGHT/2);									
+								}
+						);
 								
 		}
 		
@@ -100,7 +99,7 @@
 				else
 				{
 					player2Score++;
-c					ballReset();
+					ballReset();
 				}	
 			}
 			if(ballY< ballRadius)
